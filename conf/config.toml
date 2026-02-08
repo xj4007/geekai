@@ -1,0 +1,60 @@
+Listen = "0.0.0.0:5678"
+ProxyURL = "" # 代理地址，如 http://127.0.0.1:7777
+MysqlDns = "root:geekai123456@tcp(geekai-mysql:3306)/chatgpt_plus?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=True&loc=Local"
+StaticDir = "./static"
+StaticUrl = "/static"
+TikaHost = "http://geekai-tika:9998"
+
+[Session]
+  SecretKey = "your-secret-key-change-this-in-production-32chars"
+  MaxAge = 86400
+
+[Redis]
+  Host = "geekai-redis"
+  Port = 6379
+  Password = "geekai123456"
+  DB = 0
+
+[ApiConfig]
+  ApiURL = "https://sapi.geekai.me"
+  AppId = ""
+  Token = ""
+
+[SMS]
+   Active = "Ali"
+   [SMS.Ali]
+      AccessKey = ""
+      AccessSecret = ""
+      Product = "Dysmsapi"
+      Domain = "dysmsapi.aliyuncs.com"
+      Sign = ""
+      CodeTempId = ""
+
+[OSS]
+   Active = "local"
+   [OSS.Local]
+     BasePath = "./static/upload"
+     BaseURL = "http://YOUR_DOMAIN:8096/static/upload"  # 改成你的域名或IP
+
+[XXLConfig]
+  Enabled = false
+
+[SmtpConfig]
+   UseTls = false
+   Host = "smtp.163.com"
+   Port = 25
+   AppName = "GeekAI"
+   From = ""
+   Password = ""
+
+[AlipayConfig]
+  Enabled = false
+
+[HuPiPayConfig]
+  Enabled = false
+
+[WechatPayConfig]
+  Enabled = false
+
+[GeekPayConfig]
+  Enabled = false

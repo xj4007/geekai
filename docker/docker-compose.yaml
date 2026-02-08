@@ -59,7 +59,7 @@ services:
       - LOG_LEVEL=info
       - CONFIG_FILE=config.toml
     ports:
-      - '5678:5678'
+      - '8097:5678'
     volumes:
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
       - ./conf/config.toml:/var/www/app/config.toml
@@ -75,7 +75,7 @@ services:
     depends_on:
       - geekai-api
     ports:
-      - '8080:8080'
+      - '8096:8080'
     volumes:
       - ./logs/nginx:/var/log/nginx
       - ./conf/nginx/conf.d:/etc/nginx/conf.d

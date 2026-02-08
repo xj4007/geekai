@@ -1,0 +1,6 @@
+终端不支持中文输入导致的。最好的方式是用 SQL 文件导入，而不是在终端粘贴。
+
+  我已经在项目中创建了 data/mysql-init/fix_config.sql 文件。把它同步到服务器后，用文件方式导入：
+
+  # 用文件导入（不需要在终端粘贴中文）
+  docker compose exec -T geekai-mysql mysql -uroot -pgeekai123456 --default-character-set=utf8mb4 chatgpt_plus < data/mysql-init/fix_config.sql

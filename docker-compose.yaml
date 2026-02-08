@@ -1,0 +1,78 @@
+services:
+  # MySQL - 官方镜像
+  geekai-mysql:
+    image: mysql:8.0
+    container_name: geekai-mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=geekai123456
+      - MYSQL_DATABASE=chatgpt_plus
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql-init:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  # Redis - 官方镜像
+  geekai-redis:
+    image: redis:7-alpine
+    container_name: geekai-redis
+    restart: always
+    command: redis-server --requirepass geekai123456
+    volumes:
+      - ./data/redis:/data
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 3s
+      timeout: 10s
+      retries: 5
+
+  # Tika 文档解析 (可选，用于文档上传解析)
+  geekai-tika:
+    image: apache/tika:latest
+    container_name: geekai-tika
+    restart: always
+    ports:
+      - '9998:9998'
+
+  # 后端 API - 本地构建
+  geekai-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: geekai-api
+    restart: always
+    depends_on:
+      geekai-mysql:
+        condition: service_healthy
+      geekai-redis:
+        condition: service_healthy
+    environment:
+      - CONFIG_FILE=config.toml
+    ports:
+      - '8097:5678'
+    volumes:
+      - ./conf/config.toml:/var/www/app/config.toml
+      - ./logs/api:/var/www/app/logs
+      - ./static:/var/www/app/static
+      - ./data/leveldb:/var/www/app/data
+
+  # 前端 - 本地构建 (纯静态，不代理 API)
+  geekai-web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: geekai-web
+    restart: always
+    ports:
+      - '8096:8080'
+    volumes:
+      - ./logs/nginx:/var/log/nginx

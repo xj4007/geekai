@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-02-07T16:01:46+08:00",
+  "project": {
+    "name": "GeekAI",
+    "description": "AI 对话系统全套开源解决方案",
+    "license": "Apache-2.0",
+    "version": "4.2.3"
+  },
+  "modules": [
+    {
+      "path": "api",
+      "name": "后端服务",
+      "language": "Go",
+      "entry": "main.go",
+      "framework": "Gin + GORM + FX",
+      "hasTests": true,
+      "hasConfig": true,
+      "coverage": {
+        "entry": true,
+        "routes": true,
+        "models": true,
+        "services": true,
+        "handlers": true,
+        "config": true,
+        "tests": true
+      }
+    },
+    {
+      "path": "web",
+      "name": "前端应用",
+      "language": "JavaScript/Vue3",
+      "entry": "src/main.js",
+      "framework": "Vue3 + Element Plus + Vant + Pinia",
+      "hasTests": false,
+      "hasConfig": true,
+      "coverage": {
+        "entry": true,
+        "router": true,
+        "store": true,
+        "components": true,
+        "views": true,
+        "utils": true,
+        "tests": false
+      }
+    },
+    {
+      "path": "desktop",
+      "name": "桌面客户端",
+      "language": "JavaScript",
+      "entry": "index.js",
+      "framework": "Electron",
+      "hasTests": false,
+      "hasConfig": true,
+      "coverage": {
+        "entry": true,
+        "config": true,
+        "tests": false
+      }
+    },
+    {
+      "path": "database",
+      "name": "数据库脚本",
+      "language": "SQL",
+      "entry": "geekai_plus-v4.2.3.sql",
+      "hasTests": false,
+      "hasConfig": false,
+      "coverage": {
+        "schema": true,
+        "migrations": true
+      }
+    }
+  ],
+  "statistics": {
+    "totalFiles": {
+      "go": 130,
+      "vue": 100,
+      "js": 25,
+      "sql": 38
+    },
+    "scannedFiles": 293,
+    "coveragePercent": 85,
+    "truncated": false
+  },
+  "gaps": {
+    "tests": {
+      "api": "仅有 1 个测试文件 (crawler_test.go)",
+      "web": "无测试文件",
+      "desktop": "无测试文件"
+    },
+    "documentation": {
+      "api": "缺少 API 文档",
+      "web": "缺少组件文档"
+    }
+  },
+  "ignoredPatterns": [
+    "node_modules/**",
+    ".git/**",
+    ".github/**",
+    "dist/**",
+    "build/**",
+    "*.log",
+    "logs/**",
+    "deploy/data/**"
+  ],
+  "nextSteps": [
+    "补充 API 接口文档",
+    "增加后端单元测试覆盖",
+    "增加前端组件测试",
+    "完善 Docker 部署文档"
+  ]
+}
