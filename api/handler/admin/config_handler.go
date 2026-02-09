@@ -53,11 +53,6 @@ func (h *ConfigHandler) Update(c *gin.Context) {
 		return
 	}
 
-	// ONLY authorized user can change the copyright
-	if (data.Key == "system" && data.Config.Copyright != data.ConfigBak.Copyright) && !h.licenseService.GetLicense().Configs.DeCopy {
-		resp.ERROR(c, "您无权修改版权信息，请先联系作者获取授权")
-		return
-	}
 
 	// 如果要启用图形验证码功能，则检查是否配置了 API 服务
 	if data.Config.EnabledVerify && h.App.Config.ApiConfig.AppId == "" {
