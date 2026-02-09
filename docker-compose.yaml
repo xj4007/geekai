@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=geekai123456
-      - MYSQL_DATABASE=chatgpt_plus
+      - MYSQL_DATABASE=geekai_plus
     ports:
       - '3306:3306'
     volumes:
