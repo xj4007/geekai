@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-02-07T16:01:46+08:00",
+  "timestamp": "2026-02-21T23:00:18+08:00",
   "project": {
     "name": "GeekAI",
     "description": "AI 对话系统全套开源解决方案",
@@ -12,17 +12,44 @@
       "name": "后端服务",
       "language": "Go",
       "entry": "main.go",
-      "framework": "Gin + GORM + FX",
+      "framework": "Gin v1.9.1 + GORM v1.25.1 + FX v1.19.3",
       "hasTests": true,
       "hasConfig": true,
+      "fileCount": 158,
+      "linesOfCode": 18710,
+      "keyPaths": {
+        "entry": "api/main.go",
+        "config": "api/config.sample.toml",
+        "core": "api/core/app_server.go",
+        "configTypes": "api/core/types/config.go",
+        "models": "api/store/model/",
+        "vo": "api/store/vo/",
+        "handlers": "api/handler/",
+        "adminHandlers": "api/handler/admin/",
+        "services": "api/service/",
+        "utils": "api/utils/",
+        "migration": "api/service/migration_service.go",
+        "dockerfile": "api/Dockerfile",
+        "makefile": "api/Makefile"
+      },
       "coverage": {
         "entry": true,
         "routes": true,
         "models": true,
+        "vo": true,
         "services": true,
         "handlers": true,
+        "adminHandlers": true,
         "config": true,
-        "tests": true
+        "tests": true,
+        "middleware": true,
+        "docker": true,
+        "migration": true,
+        "paymentServices": true,
+        "ossServices": true,
+        "smsServices": true,
+        "realtimeAPI": true,
+        "promptHandler": true
       }
     },
     {
@@ -30,16 +57,43 @@
       "name": "前端应用",
       "language": "JavaScript/Vue3",
       "entry": "src/main.js",
-      "framework": "Vue3 + Element Plus + Vant + Pinia",
+      "framework": "Vue3 + Element Plus + Vant + Pinia + TailwindCSS + Stylus",
       "hasTests": false,
       "hasConfig": true,
+      "fileCount": {
+        "vue": 106,
+        "js": 25,
+        "css": 18,
+        "styl": 32
+      },
+      "linesOfCode": 26878,
+      "keyPaths": {
+        "entry": "web/src/main.js",
+        "router": "web/src/router.js",
+        "http": "web/src/utils/http.js",
+        "views": "web/src/views/",
+        "components": "web/src/components/",
+        "store": "web/src/store/",
+        "utils": "web/src/utils/",
+        "styles": "web/src/assets/css/",
+        "vueConfig": "web/vue.config.js",
+        "tailwindConfig": "web/tailwind.config.js",
+        "dockerfile": "web/Dockerfile",
+        "nginxConf": "web/nginx.conf"
+      },
       "coverage": {
         "entry": true,
         "router": true,
         "store": true,
         "components": true,
         "views": true,
+        "adminViews": true,
+        "mobileViews": true,
         "utils": true,
+        "http": true,
+        "styles": true,
+        "docker": true,
+        "wavtools": true,
         "tests": false
       }
     },
@@ -48,12 +102,19 @@
       "name": "桌面客户端",
       "language": "JavaScript",
       "entry": "index.js",
-      "framework": "Electron",
+      "framework": "Electron 26+",
       "hasTests": false,
       "hasConfig": true,
+      "fileCount": 3,
+      "keyPaths": {
+        "entry": "desktop/index.js",
+        "loading": "desktop/loading.html",
+        "config": "desktop/package.json"
+      },
       "coverage": {
         "entry": true,
         "config": true,
+        "icons": true,
         "tests": false
       }
     },
@@ -64,33 +125,72 @@
       "entry": "geekai_plus-v4.2.3.sql",
       "hasTests": false,
       "hasConfig": false,
+      "fileCount": 40,
+      "keyPaths": {
+        "latestSchema": "database/geekai_plus-v4.2.3.sql",
+        "latestUpdate": "database/update-v4.2.3.sql",
+        "archive": "database/archive/"
+      },
       "coverage": {
         "schema": true,
-        "migrations": true
+        "migrations": true,
+        "archive": true
+      }
+    },
+    {
+      "path": "docker",
+      "name": "Docker 部署 (生产)",
+      "language": "YAML/Nginx",
+      "entry": "docker-compose.yaml",
+      "hasTests": false,
+      "hasConfig": true,
+      "fileCount": 2,
+      "keyPaths": {
+        "compose": "docker/docker-compose.yaml",
+        "nginx": "docker/conf/nginx/conf.d/geekai.conf"
+      },
+      "coverage": {
+        "compose": true,
+        "nginx": true
       }
     }
   ],
   "statistics": {
     "totalFiles": {
-      "go": 130,
-      "vue": 100,
-      "js": 25,
-      "sql": 38
+      "go": 158,
+      "vue": 106,
+      "js": 30,
+      "css": 18,
+      "styl": 32,
+      "sql": 40,
+      "yaml": 4,
+      "toml": 2,
+      "dockerfile": 2,
+      "makefile": 1,
+      "other": 10
     },
-    "scannedFiles": 293,
-    "coveragePercent": 85,
+    "totalSourceFiles": 403,
+    "scannedFiles": 370,
+    "coveragePercent": 92,
     "truncated": false
   },
   "gaps": {
     "tests": {
-      "api": "仅有 1 个测试文件 (crawler_test.go)",
+      "api": "仅有 1 个测试文件 (crawler_test.go, 214 行) + 1 个辅助文件 (test.go)",
       "web": "无测试文件",
       "desktop": "无测试文件"
     },
     "documentation": {
-      "api": "缺少 API 文档",
-      "web": "缺少组件文档"
-    }
+      "api": "缺少 API 接口文档 (OpenAPI/Swagger)",
+      "web": "缺少组件文档/Storybook"
+    },
+    "unscannedDirectories": [
+      "api/res/ (嵌入资源, 二进制)",
+      "web/public/ (静态资源)",
+      "web/src/assets/iconfont/ (字体文件)",
+      "database/archive/ (仅记录路径, 未读 SQL 内容)",
+      "data/mysql-init/ (初始化脚本)"
+    ]
   },
   "ignoredPatterns": [
     "node_modules/**",
@@ -99,13 +199,25 @@
     "dist/**",
     "build/**",
     "*.log",
+    "*.lock",
+    "*.sum",
     "logs/**",
-    "deploy/data/**"
+    "deploy/data/**",
+    ".vscode/**",
+    ".idea/**",
+    "*.rar"
   ],
   "nextSteps": [
-    "补充 API 接口文档",
-    "增加后端单元测试覆盖",
-    "增加前端组件测试",
-    "完善 Docker 部署文档"
-  ]
+    "补充 API 接口文档 (考虑生成 OpenAPI/Swagger 规范)",
+    "增加后端单元测试覆盖 (当前仅 1 个测试文件)",
+    "增加前端组件测试 (考虑 Vitest + Vue Test Utils)",
+    "扫描 database/archive/ 中的 SQL 迁移脚本内容",
+    "扫描 data/mysql-init/ 初始化数据",
+    "完善 Docker 部署文档 (SSL/HTTPS 配置)"
+  ],
+  "previousScan": {
+    "timestamp": "2026-02-07T16:01:46+08:00",
+    "coveragePercent": 85,
+    "totalFiles": 293
+  }
 }
